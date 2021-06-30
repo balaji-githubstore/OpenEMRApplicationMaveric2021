@@ -24,16 +24,40 @@ namespace OpenEMRApplication
             string actualValue = DashboardPage.GetFlowBoardText(driver);
             Assert.AreEqual(expectedValue, actualValue);
         }
-        [Test]
-        public void InvalidCredential()
+
+        public static object[] InvalidCredentialData()
         {
-            LoginPage.EnterUsername(driver, "admin123");
-            LoginPage.EnterPassword(driver, "pass");
-            LoginPage.SelectLanguageByText(driver, "English (Indian)");
+            object[] temp1 = new object[4];
+            temp1[0] = "Peter";
+            temp1[1] = "Peter123";
+            temp1[2] = "English (Indian)";
+            temp1[3] = "Invalid username or password";
+
+            object[] temp2 = new object[4];
+            temp2[0] = "King";
+            temp2[1] = "King123";
+            temp2[2] = "Dutch";
+            temp2[3] = "Invalid username or password";
+
+            object[] main = new object[2];
+            main[0] = temp1;
+            main[1] = temp2;
+
+            return main;
+        }
+
+
+        [Test]
+        [TestCaseSource("InvalidCredentialData")]
+        public void InvalidCredentialTest(string username, string password, string language, string expectedValue)
+        {
+            LoginPage.EnterUsername(driver, username);
+            LoginPage.EnterPassword(driver, password);
+            LoginPage.SelectLanguageByText(driver, language);
             LoginPage.ClickOnLogin(driver);
 
             string actualValue = LoginPage.GetErrorMessage(driver);
-            Assert.AreEqual("Invalid username or password", actualValue);       
+            Assert.AreEqual(expectedValue, actualValue);       
         }
 
     }
