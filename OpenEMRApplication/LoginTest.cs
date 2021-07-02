@@ -33,6 +33,7 @@ namespace OpenEMRApplication
         {
             LoginPage.EnterUsername(driver, username);
             LoginPage.EnterPassword(driver, password);
+
             LoginPage.SelectLanguageByText(driver, language);
             LoginPage.ClickOnLogin(driver);
 
