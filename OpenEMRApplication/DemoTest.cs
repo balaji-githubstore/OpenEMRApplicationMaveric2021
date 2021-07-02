@@ -2,11 +2,40 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using ClosedXML.Excel;
 namespace OpenEMRApplication
 {
     class DemoTest
     {
+        [Test]
+        public void ExcelRead()
+        {
+            IXLWorkbook book = new XLWorkbook(@"C:\Users\JiDi\Desktop\EMRData.xlsx");
+            IXLWorksheet sheet = book.Worksheet("InvalidCredentialTest");
+            IXLRange range= sheet.RangeUsed();
+            int rowCount = range.RowCount();
+            int colCount = range.ColumnCount();
+
+            Console.WriteLine(rowCount);
+            Console.WriteLine(colCount);
+
+
+
+            for(int r=2;r<=rowCount;r++)
+            {
+                for(int c=1;c<=colCount;c++)
+                {
+                    Console.WriteLine(r+" "+c);
+                    string cellValue = Convert.ToString(range.Cell(r, c).Value);
+                    Console.WriteLine(cellValue);
+                }
+
+            }
+
+            book.Dispose();
+            //convert sheet into object[] 
+        }
+
         //John,John123
         //Peter,Peter123
         //bala,bala123

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using OpenEMRApplication.OpenEMRBase;
 using OpenEMRApplication.OpenEMRPages;
+using OpenEMRApplication.OpenEMRUtilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -24,31 +25,10 @@ namespace OpenEMRApplication
             string actualValue = DashboardPage.GetFlowBoardText(driver);
             Assert.AreEqual(expectedValue, actualValue);
         }
-
-        public static object[] InvalidCredentialData()
-        {
-            object[] temp1 = new object[4];
-            temp1[0] = "Peter";
-            temp1[1] = "Peter123";
-            temp1[2] = "English (Indian)";
-            temp1[3] = "Invalid username or password";
-
-            object[] temp2 = new object[4];
-            temp2[0] = "King";
-            temp2[1] = "King123";
-            temp2[2] = "Dutch";
-            temp2[3] = "Invalid username or password";
-
-            object[] main = new object[2];
-            main[0] = temp1;
-            main[1] = temp2;
-
-            return main;
-        }
-
+        
 
         [Test]
-        [TestCaseSource("InvalidCredentialData")]
+        [TestCaseSource(typeof(TestCaseSourceUtils),"InvalidCredentialData")]
         public void InvalidCredentialTest(string username, string password, string language, string expectedValue)
         {
             LoginPage.EnterUsername(driver, username);
