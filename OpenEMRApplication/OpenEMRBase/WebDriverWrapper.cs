@@ -18,6 +18,8 @@ namespace OpenEMRApplication.OpenEMRBase
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             driver.Url = "https://demo.openemr.io/b/openemr/index.php";
+
+            driver.t
         }
 
         [TearDown]
