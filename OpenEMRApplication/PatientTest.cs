@@ -23,35 +23,48 @@ namespace OpenEMRApplication
             login.SelectLanguageByText(language);
             login.ClickOnLogin();
 
-            Actions action = new Actions(driver);
-            action.MoveToElement(driver.FindElement(By.XPath("//div[text()='Patient/Client']"))).Perform();
-            driver.FindElement(By.XPath("//div[text()='Patients']")).Click();
+            //DashboardPage
+            DashboardPage dashboard = new DashboardPage(driver);
+            dashboard.MouseHoverOnPatientClients();
 
+            //DashboardPage
+            dashboard.ClickOnPatients();
+
+            //PatientFinderPage
             driver.SwitchTo().Frame("fin");
+            //PatientFinderPage
             driver.FindElement(By.Id("create_patient_btn1")).Click();
+            //PatientFinderPage
             driver.SwitchTo().DefaultContent();
 
+            //SearchOrAddPatientPage
             driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@name='pat']")));
-
+            //SearchOrAddPatientPage
             driver.FindElement(By.Id("form_fname")).SendKeys(firstName);
+            //SearchOrAddPatientPage
             driver.FindElement(By.Id("form_lname")).SendKeys(lastName);
-            //2021-07-03
+            //SearchOrAddPatientPage
             driver.FindElement(By.Id("form_DOB")).SendKeys(dob);
-
+            //SearchOrAddPatientPage
             SelectElement selectGender = new SelectElement(driver.FindElement(By.Id("form_sex")));
             selectGender.SelectByText(gender);
-
+            //SearchOrAddPatientPage
             driver.FindElement(By.Id("create")).Click();
+            //SearchOrAddPatientPage
             driver.SwitchTo().DefaultContent();
 
+            //SearchOrAddPatientPage
             driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@id='modalframe']")));
+            //SearchOrAddPatientPage
             driver.FindElement(By.CssSelector("input[value='Confirm Create New Patient']")).Click();
+            //SearchOrAddPatientPage
             driver.SwitchTo().DefaultContent();
 
             //ignore nosuchalertexception
             //polling time --> 1s
             // timeout - 50s
 
+            //SearchOrAddPatientPage
             DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver);
             wait.PollingInterval = TimeSpan.FromSeconds(1);
             wait.Timeout = TimeSpan.FromSeconds(50);
@@ -63,11 +76,13 @@ namespace OpenEMRApplication
 
             wait.Until(x => x.SwitchTo().Alert()).Accept();
 
+            //SearchOrAddPatientPage
             if (driver.FindElements(By.XPath("//div[@class='closeDlgIframe']")).Count>0)
             {
                 driver.FindElement(By.XPath("//div[@class='closeDlgIframe']")).Click();
             }
 
+            //PatientDashboardPage
             driver.SwitchTo().Frame(driver.FindElement(By.XPath("//iframe[@name='pat']")));
             string actualValue= driver.FindElement(By.XPath("//h2[contains(normalize-space(),'Record Dashboard')]")).Text;
             driver.SwitchTo().DefaultContent();
@@ -78,16 +93,7 @@ namespace OpenEMRApplication
         [Test]
         public void DeletePatientTest()
         {
-            //ignore all any exceptions
-            DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver);
-            wait.PollingInterval = TimeSpan.FromSeconds(1);
-            wait.Timeout = TimeSpan.FromSeconds(50);
-            wait.IgnoreExceptionTypes(typeof(Exception));
-            wait.Message = "No alert present for 50s with 1s polling time - add patient alert";
-
-            wait.Until(x => x.FindElement(By.XPath("//div[@class='closeDlgIframe']"))).Click();
-
-            //driver.FindElement(By.XPath("//div[@class='closeDlgIframe']")).Click();
+            
         }
     }
 }

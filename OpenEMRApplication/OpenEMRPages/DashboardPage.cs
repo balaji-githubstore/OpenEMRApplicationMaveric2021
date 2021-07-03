@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,8 @@ namespace OpenEMRApplication.OpenEMRPages
     class DashboardPage
     {
         private By flowBoardLocator = By.XPath("//div[contains(text(),'Flow')]");
+        private By patientClientLocator = By.XPath("//div[text()='Patient/Client']");
+        private By patientLocator = By.XPath("//div[text()='Patients']");
 
         private IWebDriver driver;
         public DashboardPage(IWebDriver driver)
@@ -23,6 +26,16 @@ namespace OpenEMRApplication.OpenEMRPages
         public void ClickOnFlowBoard()
         {
             driver.FindElement(flowBoardLocator).Click();
+        }
+        public void MouseHoverOnPatientClients()
+        {
+            Actions action = new Actions(driver);
+            action.MoveToElement(driver.FindElement(patientClientLocator)).Perform();
+        }
+
+        public void ClickOnPatients()
+        {
+            driver.FindElement(patientLocator).Click();
         }
     }
 }
