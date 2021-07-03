@@ -17,12 +17,13 @@ namespace OpenEMRApplication
         [TestCase("physician", "physician", "Danish", "Flow Board")]
         public void ValidCredentialTest(string username,string password,string language,string expectedValue)
         {
-            LoginPage.EnterUsername(driver, username);
-            LoginPage.EnterPassword(driver, password);
-            LoginPage.SelectLanguageByText(driver, language);
-            LoginPage.ClickOnLogin(driver);
-
-            string actualValue = DashboardPage.GetFlowBoardText(driver);
+            LoginPage login = new LoginPage(driver);
+            login.EnterUsername( username);
+            login.EnterPassword( password);
+            login.SelectLanguageByText( language);
+            login.ClickOnLogin();
+            DashboardPage dashboard = new DashboardPage(driver);
+            string actualValue = dashboard.GetFlowBoardText();
             Assert.AreEqual(expectedValue, actualValue);
         }
         
@@ -31,13 +32,13 @@ namespace OpenEMRApplication
         [TestCaseSource(typeof(TestCaseSourceUtils),"InvalidCredentialData")]
         public void InvalidCredentialTest(string username, string password, string language, string expectedValue)
         {
-            LoginPage.EnterUsername(driver, username);
-            LoginPage.EnterPassword(driver, password);
+            LoginPage login = new LoginPage(driver);
+            login.EnterUsername(username);
+            login.EnterPassword(password);
+            login.SelectLanguageByText( language);
+            login.ClickOnLogin();
 
-            LoginPage.SelectLanguageByText(driver, language);
-            LoginPage.ClickOnLogin(driver);
-
-            string actualValue = LoginPage.GetErrorMessage(driver);
+            string actualValue = login.GetErrorMessage();
             Assert.AreEqual(expectedValue, actualValue);       
         }
 

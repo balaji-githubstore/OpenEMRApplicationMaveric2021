@@ -8,35 +8,41 @@ namespace OpenEMRApplication.OpenEMRPages
 {
     class LoginPage
     {
-        private static By usernameLocator = By.Id("authUser");
-        private static By passwordLocator = By.Id("clearPass");
-        private static By languageLocator = By.Name("languageChoice");
-        private static By loginLocator = By.CssSelector("[type='submit']");
-        private static By errorLocator=By.XPath("//div[contains(text(),'Invalid')]");
+        private By usernameLocator = By.Id("authUser");
+        private By passwordLocator = By.Id("clearPass");
+        private By languageLocator = By.Name("languageChoice");
+        private By loginLocator = By.CssSelector("[type='submit']");
+        private By errorLocator=By.XPath("//div[contains(text(),'Invalid')]");
 
+        private IWebDriver driver;
 
-        public static void EnterUsername(IWebDriver driver,string username)
+        public LoginPage(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
+       
+        public void EnterUsername(string username)
         {
             driver.FindElement(usernameLocator).SendKeys(username);
         }
 
-        public static void EnterPassword(IWebDriver driver,string password)
+        public void EnterPassword(string password)
         {
             driver.FindElement(passwordLocator).SendKeys(password);
         }
 
-        public static void SelectLanguageByText(IWebDriver driver,string language)
+        public void SelectLanguageByText(string language)
         {
             SelectElement select = new SelectElement(driver.FindElement(languageLocator));
             select.SelectByText(language);
         }
 
-        public static void ClickOnLogin(IWebDriver driver)
+        public void ClickOnLogin()
         {
             driver.FindElement(loginLocator).Click();
         }
 
-        public static string GetErrorMessage(IWebDriver driver)
+        public string GetErrorMessage()
         {
             return driver.FindElement(errorLocator).Text.Trim();
         }

@@ -8,17 +8,21 @@ namespace OpenEMRApplication.OpenEMRPages
     //all menu handling
     class DashboardPage
     {
-        private static By flowBoardLocator = By.XPath("//div[contains(text(),'Flow')]");
+        private By flowBoardLocator = By.XPath("//div[contains(text(),'Flow')]");
 
-        public static string GetFlowBoardText(IWebDriver driver)
+        private IWebDriver driver;
+        public DashboardPage(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
+
+        public string GetFlowBoardText()
         {
             return driver.FindElement(flowBoardLocator).Text;
         }
-        public static void ClickOnFlowBoard(IWebDriver driver)
+        public void ClickOnFlowBoard()
         {
             driver.FindElement(flowBoardLocator).Click();
         }
-
-
     }
 }
