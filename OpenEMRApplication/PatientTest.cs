@@ -55,13 +55,13 @@ namespace OpenEMRApplication
             DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver);
             wait.PollingInterval = TimeSpan.FromSeconds(1);
             wait.Timeout = TimeSpan.FromSeconds(50);
-            wait.IgnoreExceptionTypes(typeof(NoAlertPresentException), typeof(NoSuchElementException));
+            wait.IgnoreExceptionTypes(typeof(NoAlertPresentException));
             wait.Message = "No alert present for 50s with 1s polling time - add patient alert";
 
-            IWebElement ele = wait.Until(x => x.FindElement(By.XPath("//b")));
-            ele.Click();
+            string alertText= wait.Until(x => x.SwitchTo().Alert()).Text;
+            Console.WriteLine(alertText);
 
-            //wait.Until(x => x.FindElement(By.XPath(""))).Click();
+            wait.Until(x => x.SwitchTo().Alert()).Accept();
 
             if (driver.FindElements(By.XPath("//div[@class='closeDlgIframe']")).Count>0)
             {
