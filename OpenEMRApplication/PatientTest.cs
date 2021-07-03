@@ -78,7 +78,16 @@ namespace OpenEMRApplication
         [Test]
         public void DeletePatientTest()
         {
-         
+            //ignore all any exceptions
+            DefaultWait<IWebDriver> wait = new DefaultWait<IWebDriver>(driver);
+            wait.PollingInterval = TimeSpan.FromSeconds(1);
+            wait.Timeout = TimeSpan.FromSeconds(50);
+            wait.IgnoreExceptionTypes(typeof(Exception));
+            wait.Message = "No alert present for 50s with 1s polling time - add patient alert";
+
+            wait.Until(x => x.FindElement(By.XPath("//div[@class='closeDlgIframe']"))).Click();
+
+            //driver.FindElement(By.XPath("//div[@class='closeDlgIframe']")).Click();
         }
     }
 }
