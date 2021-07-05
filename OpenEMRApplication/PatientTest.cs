@@ -14,6 +14,7 @@ namespace OpenEMRApplication
 {
     class PatientTest : WebDriverWrapper
     {
+        //data will be taken from TestCaseSourceUtils hardcoded data in C# file
         [Test,TestCaseSource(typeof(TestCaseSourceUtils), "AddPatientData")]
         public void AddPatientTest(string username,string password,string language,string firstName,String lastName,string dob,string gender,string expectedValue)
         {

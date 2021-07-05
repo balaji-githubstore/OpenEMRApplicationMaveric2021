@@ -6,6 +6,12 @@ namespace OpenEMRApplication.OpenEMRUtilities
 {
     public class TestCaseSourceUtils
     {
+
+        public static object[] ValidCredentialData()
+        {
+            object[] main = JsonUtils.GetJSONArrayAsObject(@"D:\B-Mine\Company\Company\Maveric 2021\OpenEMRApplication\OpenEMRApplication\TestData\data.json", "ValidCredentialTest");
+            return main;
+        }
         public static object[] InvalidCredentialData()
         {
             object[] main=  ExcelUtils.GetSheetIntoTestCaseSourceArray(@"C:\Users\JiDi\Desktop\EMRData.xlsx", "InvalidCredentialTest");

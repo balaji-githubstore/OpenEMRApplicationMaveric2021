@@ -3,10 +3,50 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ClosedXML.Excel;
+using System.IO;
+using Newtonsoft.Json;
+
 namespace OpenEMRApplication
 {
     class DemoTest
     {
+        [Test]
+        public void JSONRead()
+        {
+            StreamReader reader = new StreamReader(@"D:\B-Mine\Company\Company\Maveric 2021\OpenEMRApplication\OpenEMRApplication\TestData\data.json");
+            string text=reader.ReadToEnd();
+           // Console.WriteLine(text);
+
+            dynamic json=  JsonConvert.DeserializeObject(text);
+            Console.WriteLine(json["browser"]);
+
+        }
+
+        [Test]
+        public void JSONRead2()
+        {
+            StreamReader reader = new StreamReader(@"D:\B-Mine\Company\Company\Maveric 2021\OpenEMRApplication\OpenEMRApplication\TestData\data.json");
+            string text = reader.ReadToEnd();
+            // Console.WriteLine(text);
+
+            dynamic json = JsonConvert.DeserializeObject(text);
+            Console.WriteLine(json["validcredentialdata"][0][1]);
+            Console.WriteLine(json["validcredentialdata"].Count);
+
+            object[] testCaseArray = new object[json["validcredentialdata"].Count];
+
+            for (int i=0; i < testCaseArray.Length; i++)
+            {
+                object[] temp = new object[json["validcredentialdata"][i].Count];
+                for (int j = 0; j < temp.Length; j++)
+                {
+                    temp[j] = Convert.ToString(json["validcredentialdata"][i][j]);
+                }
+                testCaseArray[i] = temp;
+            }
+        }
+
+
         [Test]
         public void ExcelRead()
         {
@@ -69,7 +109,7 @@ namespace OpenEMRApplication
         [Test]
         [TestCaseSource("ValidData")]
         public void ValidTest(string username,string password)
-        { 
+        {
             Console.WriteLine(username+password);
         }
     }
