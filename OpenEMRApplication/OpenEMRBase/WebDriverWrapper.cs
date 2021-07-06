@@ -18,7 +18,9 @@ namespace OpenEMRApplication.OpenEMRBase
         public void Init()
         {
             string browser= JsonUtils.GetValue(@"D:\B-Mine\Company\Company\Maveric 2021\OpenEMRApplication\OpenEMRApplication\TestData\data.json", "browser");
-            
+
+            browser = TestContext.Parameters.Get("browser", browser);
+
             switch(browser.ToLower())
             {
                 case "ie":
