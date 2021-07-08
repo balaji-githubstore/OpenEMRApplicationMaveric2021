@@ -1,3 +1,4 @@
+using AventStack.ExtentReports;
 using NUnit.Framework;
 using OpenEMRApplication.OpenEMRBase;
 using OpenEMRApplication.OpenEMRPages;
@@ -21,11 +22,15 @@ namespace OpenEMRApplication
         {
             var login = new LoginPage(driver);
             login.EnterUsername( username);
+            test.Log(Status.Info, "Username entered successfully as "+username);
             login.EnterPassword( password);
             login.SelectLanguageByText( language);
             login.ClickOnLogin();
             var dashboard = new DashboardPage(driver);
             var actualValue = dashboard.GetFlowBoardText();
+
+            test.Log(Status.Info, "actual value " + actualValue);
+
             Assert.AreEqual(expectedValue, actualValue);
 
         }

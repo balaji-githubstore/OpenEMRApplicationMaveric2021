@@ -1,9 +1,9 @@
 {
-  "browser": "ff",
+  "browser": "ch",
   "connectionstringdb": "Data Source=COMPUTER\\PIPETTEX;Initial Catalog=openemr;User ID=sa;Password=123456;Integrated Security=true",
   "ValidCredentialTest": [
     [ "admin", "pass", "English (Indian)", "Flow Board" ],
-    [ "accountant", "accountant", "Dutch", "Flow Board" ],
+    [ "accountant", "accountant", "Dutch", "Flow boord" ],
     [ "physician", "physician", "English (Indian)", "Flow Board" ]
   ]
 }

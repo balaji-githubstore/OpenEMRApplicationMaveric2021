@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AventStack.ExtentReports;
+using NUnit.Framework;
 using OpenEMRApplication.OpenEMRBase;
 using OpenEMRApplication.OpenEMRPages;
 using OpenEMRApplication.OpenEMRUtilities;
@@ -18,6 +19,7 @@ namespace OpenEMRApplication
         [Test,TestCaseSource(typeof(TestCaseSourceUtils), "AddPatientData")]
         public void AddPatientTest(string username,string password,string language,string firstName,String lastName,string dob,string gender,string expectedValue)
         {
+            test.Log(Status.Info, "add patient test case started");
             LoginPage login = new LoginPage(driver);
             login.EnterUsername(username);
             login.EnterPassword(password);
