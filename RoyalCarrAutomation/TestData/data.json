@@ -1,6 +1,6 @@
 {
   "browser": "ch",
-  "url": "https://demo.openemr.io/b/openemr",
+  "url": "https://www.royalcaribbean.com/",
   "connectionstringdb": "Data Source=COMPUTER\\PIPETTEX;Initial Catalog=openemr;User ID=sa;Password=123456;Integrated Security=true",
   "ValidCredentialTest": [
     [ "admin", "pass", "English (Indian)", "Flow Board" ],

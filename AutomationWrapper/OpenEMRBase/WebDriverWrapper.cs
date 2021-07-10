@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace OpenEMRApplication.OpenEMRBase
+namespace AutomationWrapper.Base
 {
     public class WebDriverWrapper
     {
@@ -22,10 +22,6 @@ namespace OpenEMRApplication.OpenEMRBase
         public static ExtentReports extent;
         public static ExtentTest test;
         public static string screenShotPath;
-
-
-
-
 
         [OneTimeSetUp]
         public void Start()
@@ -55,7 +51,7 @@ namespace OpenEMRApplication.OpenEMRBase
         [SetUp]
         public void StartBrowser()
         {
-            string browser = JsonUtils.GetValue(@"D:\B-Mine\Company\Company\Maveric 2021\OpenEMRApplication\OpenEMRApplication\TestData\data.json", "browser");
+            string browser = JsonUtils.GetValue(projectPath+@"TestData\data.json", "browser");
 
             browser = TestContext.Parameters.Get("browser", browser);
 
@@ -76,7 +72,8 @@ namespace OpenEMRApplication.OpenEMRBase
 
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-            driver.Url = "https://demo.openemr.io/b/openemr/index.php";
+            driver.Url = JsonUtils.GetValue(projectPath + @"TestData\data.json", "url");
+
 
             test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
         }

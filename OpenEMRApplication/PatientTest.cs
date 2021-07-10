@@ -1,6 +1,6 @@
-﻿using AventStack.ExtentReports;
+﻿using AutomationWrapper.Base;
+using AventStack.ExtentReports;
 using NUnit.Framework;
-using OpenEMRApplication.OpenEMRBase;
 using OpenEMRApplication.OpenEMRPages;
 using OpenEMRApplication.OpenEMRUtilities;
 using OpenQA.Selenium;

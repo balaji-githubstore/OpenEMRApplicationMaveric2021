@@ -24,4 +24,8 @@
     <Folder Include="Reports\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AutomationWrapper\AutomationWrapper.csproj" />
+  </ItemGroup>
+
 </Project>
